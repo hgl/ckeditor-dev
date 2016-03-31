@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @license Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
@@ -65,7 +65,7 @@
 	};
 
 	var panelTpl = CKEDITOR.addTemplate( 'panel', '<div lang="{langCode}" id="{id}" dir={dir}' +
-		' class="cke cke_reset_all {editorId} cke_panel cke_panel {cls} cke_{dir}"' +
+		' class="cke cke_reset_all {editorId} cke_panel {cls} cke_{dir}"' +
 		' style="z-index:{z-index}" role="presentation">' +
 		'{frame}' +
 		'</div>' );

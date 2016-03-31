@@ -105,6 +105,8 @@ a:active.cke_colorbox span.cke_colorbox,
 
 .cke_coloricon_active:before {
 	content: "✓";
+	font-weight: bold;
+	margin-left: -1px;
 }
 
 /* Buttons which are visible at the top/bottom of the color palette:
@@ -153,6 +155,7 @@ span.cke_coloricon_default {
 	color: #b3b3b3;
 	font-size: 8px;
 	cursor: pointer;
+	text-transform: uppercase;
 }
 
 .cke_coloricon_label {

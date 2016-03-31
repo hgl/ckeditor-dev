@@ -34,7 +34,7 @@ CKEDITOR.plugins.add( 'colorbutton', {
 		});
 
 		if ( !CKEDITOR.env.hc ) {
-			addButton( 'TextColor', 'fore', lang.textColorTitle, 10 );
+			addButton( 'TextColor', 'fore', '', 10 );
 		}
 
 		var customColorRowId = CKEDITOR.tools.getNextId() + '_customColor';
@@ -58,7 +58,6 @@ CKEDITOR.plugins.add( 'colorbutton', {
 
 			editor.ui.add( name, CKEDITOR.UI_PANELBUTTON, {
 				label: title,
-				title: title,
 				modes: { wysiwyg: 1 },
 				editorFocus: 0,
 				toolbar: 'colors,' + order,
@@ -235,7 +234,7 @@ CKEDITOR.plugins.add( 'colorbutton', {
 				switch (colorName) {
 				case 'default':
 					td = '<td colspan="4">'
-					text = '<span class="cke_coloricon_label">USE DEFAULT</span>'
+					text = '<span class="cke_coloricon_label">' + editor.lang.colorbutton.useDefault + '</span>'
 					break;
 				case 'custom1':
 					var customClickFn = CKEDITOR.tools.addFunction(function() {
