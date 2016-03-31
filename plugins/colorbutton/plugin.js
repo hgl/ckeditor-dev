@@ -43,6 +43,8 @@ CKEDITOR.plugins.add( 'colorbutton', {
 			custom2: CKEDITOR.tools.getNextId() + '_customColor'
 		};
 
+		var defaultColor
+
 		function addButton( name, type, title, order ) {
 			if (type === 'fore') {
 				var style = {
@@ -111,19 +113,42 @@ CKEDITOR.plugins.add( 'colorbutton', {
 					var path = editor.elementPath();
 					var firstBlock = path.block || path.blockLimit;
 					var activeItem = doc.find('.cke_coloricon_active').getItem(0)
-					if (activeItem) activeItem.removeClass('cke_coloricon_active')
-					var defaultTr = doc.getById('cke_coloricon_default')
-					defaultTr.hide()
+					if (activeItem) {
+						activeItem.setStyles({
+							color: '',
+							'border-color': ''
+						})
+						activeItem.removeClass('cke_coloricon_active')
+					}
 					var colorNames = config.colorButton_colors.map(function(color) {return color[0]})
 					colorNames.push('custom1', 'custom2')
+					var defaultItem = doc.find('.cke_coloricon_default').getItem(0)
+					defaultColor = null
+					var selectedItem
 					colorNames.some(function(colorName) {
 						var colorClass = config.colorButton_colorClassNamePattern.replace('%s', colorName)
 						if (firstBlock.hasClass(colorClass)) {
-							defaultTr.show()
-							doc.find('.cke_coloricon_' + colorName).getItem(0).addClass('cke_coloricon_active')
+							firstBlock.removeClass(colorClass)
+							defaultColor = firstBlock.getComputedStyle('color')
+							firstBlock.addClass(colorClass)
+							selectedItem = doc.find('.cke_coloricon_' + colorName).getItem(0)
+							selectedItem.addClass('cke_coloricon_active')
 							return true
 						}
 					})
+					if (!defaultColor) {
+						defaultColor = firstBlock.getComputedStyle('color')
+						defaultItem.addClass('cke_coloricon_active')
+						selectedItem = defaultItem
+					}
+					defaultItem.setStyle('background-color', defaultColor)
+
+					if (selectedItem.getComputedStyle('background-color') === 'rgb(255, 255, 255)') {
+						selectedItem.setStyles({
+							color: '#ffb400',
+							'border-color': '#ffb400'
+						})
+					}
 
 					// enable custom color
 					var customColors = config.colorButton_getCustomColors()
@@ -194,13 +219,25 @@ CKEDITOR.plugins.add( 'colorbutton', {
 				var iterator = range.createIterator();
 				iterator.enlargeBr = true;
 
+				var colorChecked = false
+				var sameColor = false
 				while ( block = iterator.getNextParagraph( 'p' ) ) {
 					if ( block.isReadOnly() ) continue;
 					classNames.forEach(function(name) {
 						block.removeClass( name );
 					})
 					if ( color !== "default" ) {
-						block.addClass( className );
+						if (!colorChecked) {
+							colorChecked = true
+							block.addClass( className );
+							color = block.getComputedStyle( 'color' );
+							if (color === defaultColor) {
+								sameColor = true
+								block.removeClass( className );
+							}
+						} else if (!sameColor) {
+							block.addClass( className );
+						}
 					}
 				}
 

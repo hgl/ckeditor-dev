@@ -98,14 +98,13 @@ a.cke_colorbox
 a:hover.cke_colorbox span.cke_colorbox,
 a:focus.cke_colorbox span.cke_colorbox,
 a:active.cke_colorbox span.cke_colorbox,
-.cke_coloricon_active
+span.cke_coloricon_active
 {
-	border-color: #fff !important;
+	border-color: #fff;
 }
 
 .cke_coloricon_active:before {
 	content: "✓";
-	font-weight: bold;
 	margin-left: -1px;
 }
 
@@ -134,14 +133,6 @@ a:active.cke_colormore
 	background-color: #e5e5e5;
 }
 
-span.cke_coloricon_default {
-	border: none;
-	width: 16px;
-	height: 16px;
-	background: url(images/cancel.png) no-repeat;
-	opacity: 0.4;
-}
-
 .cke_coloricon_default {
 	vertical-align: middle;
 }
@@ -167,13 +158,4 @@ span.cke_coloricon_default {
 }
 a:hover.cke_colorbox span.cke_coloricon_default {
 	opacity: 1;
-}
-
-a:hover.cke_colorbox span.cke_coloricon_white,
-.cke_coloricon_white.cke_coloricon_active {
-	border-color: #ffb400 !important;
-}
-
-.cke_coloricon_white.cke_coloricon_active {
-	color: #ffb400;
 }
