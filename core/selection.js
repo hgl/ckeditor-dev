@@ -878,7 +878,7 @@
 				// when setting text. Selection's direction must be preserved.
 				// (#7437, #12489, #12491 comment:3)
 				var sel = editor.document.$.getSelection();
-				if ( sel.type != 'None' && ( sel.anchorNode == fillingChar.$ || sel.focusNode == fillingChar.$ ) )
+				if ( sel.type != 'None' && ( sel.anchorNode == fillingChar.$ || sel.focusNode == fillingChar.$ ) && editable.getText() !== "\u200b" )
 					selectionBookmark = createNativeSelectionBookmark( sel );
 
 				fillingCharBefore = fillingChar.getText();
